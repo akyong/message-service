@@ -39,7 +39,7 @@ public class ProductService implements ProductRepository {
     private ItemRepository itemRepository;
     private Logger LOG = LoggerFactory.getLogger(ProductService.class);
 
-    public ProductService(ItemRepository itemRepository, @CurrentSession EntityManager entityManager){
+    public ProductService(ItemRepository itemRepository, @CurrentSession EntityManager entityManager) {
         this.entityManager = entityManager;
         this.itemRepository = itemRepository;
     }
@@ -61,10 +61,8 @@ public class ProductService implements ProductRepository {
 
             resultSet = preparedStatement.executeQuery();
             while(resultSet.next()){
-                HashMap test = new HashMap();
 
                 int product_id = resultSet.getInt("id");
-                float a = 0 , b = 0, c = 0;
                 int priceRow = 0, urut = -1, urutSup = 0;
                 boolean ket;
                 Long priceId = null;
@@ -72,23 +70,19 @@ public class ProductService implements ProductRepository {
 
                 ListPrice listAgen = new ListPrice();
                 ListPriceSupDetail listAgenS = new ListPriceSupDetail();
+                LOG.info("product _id : {}",product_id);
                 int price = itemRepository.findByPriceId(product_id);
                 ket = false;
 
-                //LOG.info("HARGA : " + price);
+                LOG.info("HARGA : " + price);
                 //for(int l = 0 ; l< categoryId.size(); l++){
                 List<Permission> permissionList = findAllByCategoryIdList(categoryIdx);//satu row ini, kamu dibawah gak usa melakukan 3x query untuk float a,b,c
                 int size = permissionList.size();
 
-                LOG.info("size {}",size);
-
-
                 if(size >= 1) {
                     for(int i = 0; i < size; i++){
                         supplierCode = permissionList.get(i).getSupplierCode();
-                        LOG.info("int i  : {} " + i);
-                        LOG.info("supplierCode : " + supplierCode);
-                        LOG.info("IDTEST : " + permissionList.get(i).getId());
+//                        LOG.info("IDTEST : " + permissionList.get(i).getId());
                         if(supplierCode != null) {
                             if (supplierCode.equals(supplier_code)) {
                                 urutSup = i;
@@ -103,7 +97,6 @@ public class ProductService implements ProductRepository {
 
 
                 if (!permissionList.isEmpty()) {
-                    LOG.info("permision : {}", urut);
                     for (int z = 0; z < permissionList.get(urut).getFormulaHeader().getFormulaDetailPriceList().size() ; z++) {
 //                        LOG.info("category id : " + categoryId + " harga : " + price);
 
@@ -212,6 +205,8 @@ public class ProductService implements ProductRepository {
 
         return rs.toString();
     }
+
+
 
     public List<Permission>  findAllByCategoryIdList(@NotNull String categoryId){
         Connection con = null;
