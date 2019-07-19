@@ -17,7 +17,6 @@ import java.util.List;
 @KafkaListener(offsetReset = OffsetReset.EARLIEST)
 public class ProductListener {
     private final ProductRepository productRepository;
-    private static String now = new SimpleDateFormat("dd/MM/yyyy hh:mm:ss").format(new Date());
 
     public ProductListener(ProductRepository productRepository){
         this.productRepository = productRepository;
@@ -27,6 +26,7 @@ public class ProductListener {
 
     @Topic("my-products")
     public void receive(@KafkaKey @Nullable  String supplier_code, @NotNull List<Integer> categoryId) {
+        String now = new SimpleDateFormat("dd/MM/yyyy hh:mm:ss").format(new Date());
         LOG.info("supplier ocde : {}", supplier_code != null ? supplier_code : "suppliercode null");
         LOG.info("list Category Id = {}",categoryId);
         LOG.info("{} : --------------------- {}", now, "START UPDATE PRODUCT");
