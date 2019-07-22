@@ -14,7 +14,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
-@KafkaListener(batch = true)
+@KafkaListener(offsetReset = OffsetReset.EARLIEST,batch = true)
 public class ProductListener {
     private final ProductRepository productRepository;
 
