@@ -268,7 +268,7 @@ public class ProductService implements ProductRepository {
 
         try {
             con = dataSourceTokdis.getConnection();
-            preparedStatement = con.prepareStatement("UPDATE product_details SET rfc_price = ? where id = ?");
+            preparedStatement = con.prepareStatement("UPDATE product_details SET rfc_price = ?, version = version + 1 where id = ?");
             preparedStatement.setString(1,listAgen.toString());
             preparedStatement.setInt(2,product_id);
             preparedStatement.executeUpdate();
