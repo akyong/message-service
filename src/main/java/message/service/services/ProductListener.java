@@ -25,8 +25,31 @@ public class ProductListener {
 
     private Logger LOG = LoggerFactory.getLogger(ProductListener.class);
 
+    @Topic("my-products001")
+    public void receive1(FormulaUpdate formulaUpdate) {
+        String now = new SimpleDateFormat("dd/MM/yyyy hh:mm:ss").format(new Date());
+//        LOG.info("supplier ocde : {}", supplier_code != null ? supplier_code : "suppliercode null");
+//        LOG.info("list Category Id = {}",categoryId);
+        LOG.info("{} : --------------------- {}", now, "START UPDATE PRODUCT");
+//        String supplier_code = null;
+        productRepository.formulaUpdateAll(formulaUpdate.getSupplierCode(),formulaUpdate.getCategoryId());
+        LOG.info("{} : --------------------- {}", now, "END UPDATE PRODUCT");
+
+    }
+
     @Topic("my-products002")
-    public void receive(FormulaUpdate formulaUpdate) {
+    public void receive2(FormulaUpdate formulaUpdate) {
+        String now = new SimpleDateFormat("dd/MM/yyyy hh:mm:ss").format(new Date());
+//        LOG.info("supplier ocde : {}", supplier_code != null ? supplier_code : "suppliercode null");
+//        LOG.info("list Category Id = {}",categoryId);
+        LOG.info("{} : --------------------- {}", now, "START UPDATE PRODUCT");
+//        String supplier_code = null;
+        productRepository.formulaUpdateAll(formulaUpdate.getSupplierCode(),formulaUpdate.getCategoryId());
+        LOG.info("{} : --------------------- {}", now, "END UPDATE PRODUCT");
+
+    }
+    @Topic("my-products003")
+    public void receive3(FormulaUpdate formulaUpdate) {
         String now = new SimpleDateFormat("dd/MM/yyyy hh:mm:ss").format(new Date());
 //        LOG.info("supplier ocde : {}", supplier_code != null ? supplier_code : "suppliercode null");
 //        LOG.info("list Category Id = {}",categoryId);
