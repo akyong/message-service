@@ -15,7 +15,6 @@ jpa:
   default:
     packages-to-scan:
       - 'message.service.domain'
-
     properties:
       hibernate:
         dialect: org.hibernate.dialect.MySQL5InnoDBDialect
