@@ -98,11 +98,10 @@ public class ProductService implements ProductRepository {
 
                 if (!permissionList.isEmpty()) {
                     for (int z = 0; z < permissionList.get(urut).getFormulaHeader().getFormulaDetailPriceList().size() ; z++) {
-//                        LOG.info("category id : " + categoryId + " harga : " + price);
 
                         float fr = permissionList.get(urut).getFormulaHeader().getFormulaDetailPriceList().get(z).getPriceFrom();
                         float to = permissionList.get(urut).getFormulaHeader().getFormulaDetailPriceList().get(z).getPriceTo();
-
+                        LOG.info("Urut " + urut+ " Harga : " + price + " From : " +  fr + "  To : " + to );
                         if (fr <= price && price <= to) {
 
                             priceRow = z;
